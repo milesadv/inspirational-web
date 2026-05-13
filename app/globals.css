@@ -1,0 +1,36 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: #f6f1e7;
+  color: #1a1a1a;
+}
+
+::selection {
+  background: #e9c46a;
+  color: #1a1a1a;
+}
+
+.reading-copy {
+  font-size: 1.0625rem;
+  line-height: 1.75;
+  color: rgba(26, 26, 26, 0.76);
+}
+
+.reading-copy p + p {
+  margin-top: 1.25rem;
+}
