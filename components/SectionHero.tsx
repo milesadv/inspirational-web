@@ -9,14 +9,30 @@ type SectionHeroProps = {
 
 export function SectionHero({ eyebrow, title, text, imageLabel }: SectionHeroProps) {
   return (
-    <section className="relative overflow-hidden border-b border-gold/20 bg-parchment">
-      <div className="mx-auto grid max-w-content gap-10 px-6 py-16 md:grid-cols-[1.05fr_0.95fr] md:items-center md:py-24">
-        <div>
-          {eyebrow ? <p className="mb-4 text-sm font-semibold uppercase tracking-[0.14em] text-gold">{eyebrow}</p> : null}
-          <h1 className="max-w-3xl font-serif text-5xl font-semibold leading-[1.05] text-ink md:text-6xl">{title}</h1>
-          {text ? <p className="mt-6 max-w-2xl text-lg leading-8 text-ink/75">{text}</p> : null}
+    <section className="flex min-h-[100svh] flex-col justify-center px-6">
+      <div className="mx-auto w-full max-w-content py-24 md:py-32">
+        <div className="max-w-2xl">
+          {eyebrow ? (
+            <p className="mb-4 text-[0.72rem] font-medium uppercase tracking-[0.14em] text-gold">
+              {eyebrow}
+            </p>
+          ) : null}
+          <h1 className="font-serif text-[2.5rem] font-semibold leading-[1.08] text-ink md:text-[3.5rem] lg:text-[4.2rem]">
+            {title}
+          </h1>
+          {text ? (
+            <p className="mt-5 max-w-lg text-lg leading-relaxed text-ink/45">{text}</p>
+          ) : null}
         </div>
-        {imageLabel ? <PlaceholderImage label={imageLabel} aspect="wide" className="shadow-soft" /> : null}
+
+        {imageLabel ? (
+          <div className="mt-12">
+            <PlaceholderImage label={imageLabel} aspect="hero" mood="warm" />
+            <span className="plate-caption">{imageLabel}</span>
+          </div>
+        ) : (
+          <hr className="gold-rule mt-12" />
+        )}
       </div>
     </section>
   );

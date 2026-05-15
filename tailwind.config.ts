@@ -17,15 +17,15 @@ const config: Config = {
         highlight: "#E9C46A"
       },
       fontFamily: {
-        serif: ["var(--font-cormorant)", "Cormorant Garamond", "serif"],
-        sans: ["var(--font-inter)", "Inter", "sans-serif"]
+        serif: ["var(--font-cormorant)", "Cormorant Garamond", "Georgia", "serif"]
       },
       maxWidth: {
         content: "1200px",
-        reading: "680px"
+        reading: "680px",
+        narrow: "520px"
       },
-      boxShadow: {
-        soft: "0 22px 60px rgba(26, 26, 26, 0.10)"
+      letterSpacing: {
+        caps: "0.14em"
       }
     }
   },

@@ -4,20 +4,19 @@
 
 :root {
   color-scheme: light;
+  --gold: #B8893B;
+  --forest: #2E4034;
+  --parchment: #F6F1E7;
+  --ink: #1A1A1A;
 }
 
-* {
-  box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
-}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
 
 body {
   margin: 0;
-  background: #f6f1e7;
-  color: #1a1a1a;
+  background: var(--parchment);
+  color: var(--ink);
 }
 
 ::selection {
@@ -25,12 +24,238 @@ body {
   color: #1a1a1a;
 }
 
+/* ================================================================
+   READING COPY
+   ================================================================ */
+
 .reading-copy {
   font-size: 1.0625rem;
-  line-height: 1.75;
-  color: rgba(26, 26, 26, 0.76);
+  line-height: 1.8;
+  color: rgba(26, 26, 26, 0.72);
 }
 
 .reading-copy p + p {
-  margin-top: 1.25rem;
+  margin-top: 1.35rem;
+}
+
+.reading-copy.has-dropcap > p:first-child::first-letter {
+  float: left;
+  font-family: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
+  font-size: 3.6em;
+  line-height: 0.78;
+  font-weight: 600;
+  color: var(--forest);
+  padding-right: 0.08em;
+  padding-top: 0.06em;
+}
+
+/* Reveal animations are handled via inline transitions in Reveal.tsx */
+
+/* ================================================================
+   HAIRLINE RULES
+   ================================================================ */
+
+.rule {
+  border: none;
+  height: 1px;
+  background: rgba(26, 26, 26, 0.08);
+}
+
+.gold-rule {
+  border: none;
+  height: 1px;
+  background: rgba(184, 137, 59, 0.2);
+}
+
+.gold-rule-short {
+  border: none;
+  height: 1px;
+  width: 48px;
+  background: rgba(184, 137, 59, 0.35);
+}
+
+/* ================================================================
+   SECTION BACKGROUNDS - flattened, no gradients
+   ================================================================ */
+
+.section-warm { background: #F0EAD9; }
+.section-cream { background: #FDFBF7; }
+.section-parchment-deep { background: #EDE5D4; }
+
+/* ================================================================
+   BUTTONS - flat, typographic
+   ================================================================ */
+
+.btn-gold {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.65rem 1.8rem;
+  border: 1px solid var(--gold);
+  background: var(--gold);
+  color: #fff;
+  font-family: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+.btn-gold:hover {
+  background: var(--forest);
+  border-color: var(--forest);
+}
+
+.btn-gold:focus-visible {
+  outline: 2px solid #e9c46a;
+  outline-offset: 3px;
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.65rem 1.8rem;
+  border: 1px solid rgba(26, 26, 26, 0.15);
+  background: transparent;
+  font-family: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  transition: border-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-ghost:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+.btn-ghost:focus-visible {
+  outline: 2px solid #e9c46a;
+  outline-offset: 3px;
+}
+
+/* ================================================================
+   CARD SURFACES - quiet, no float
+   ================================================================ */
+
+.surface-card {
+  border: 1px solid rgba(26, 26, 26, 0.06);
+  background: rgba(255, 255, 255, 0.35);
+  transition: border-color 0.3s ease;
+}
+
+.surface-card:hover {
+  border-color: rgba(184, 137, 59, 0.2);
+}
+
+/* ================================================================
+   LINKS
+   ================================================================ */
+
+.link-reveal {
+  text-decoration: none;
+  transition: opacity 0.25s ease;
+}
+
+.link-reveal:hover {
+  opacity: 0.6;
+}
+
+/* ================================================================
+   NAV LINKS - quieter, not uppercase
+   ================================================================ */
+
+.nav-modern-link {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 0;
+  font-family: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color 0.4s ease;
+}
+
+.nav-modern-link.is-active {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+/* ================================================================
+   IMAGE HOVER - subtle
+   ================================================================ */
+
+.img-zoom {
+  overflow: hidden;
+}
+
+.img-zoom > * {
+  transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.img-zoom:hover > * {
+  transform: scale(1.03);
+}
+
+/* ================================================================
+   PLATE CAPTION (book-style image label)
+   ================================================================ */
+
+.plate-caption {
+  display: block;
+  margin-top: 0.6rem;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(26, 26, 26, 0.3);
+  text-align: center;
+}
+
+/* ================================================================
+   QUOTE GLYPH (decorative)
+   ================================================================ */
+
+.quote-glyph {
+  font-family: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
+  color: rgba(184, 137, 59, 0.15);
+  user-select: none;
+  pointer-events: none;
+  line-height: 0.7;
+}
+
+/* ================================================================
+   ORNAMENT - simplified to a thin rule
+   ================================================================ */
+
+.ornament-diamond {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ornament-diamond::before {
+  content: "";
+  width: 48px;
+  height: 1px;
+  background: rgba(184, 137, 59, 0.3);
+}
+
+.ornament-diamond span {
+  display: none;
+}
+
+.ornament-diamond::after {
+  display: none;
+}
+
+/* ================================================================
+   GRAIN - disabled globally
+   ================================================================ */
+
+.grain::after {
+  display: none;
 }
