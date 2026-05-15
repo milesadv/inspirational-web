@@ -12,6 +12,7 @@ export function Header() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
+  const headerHeight = scrolled ? 72 : 96;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -36,7 +37,7 @@ export function Header() {
       }}
     >
       <div className="mx-auto flex w-full max-w-content items-center justify-between px-6"
-        style={{ height: scrolled ? "72px" : "96px", transition: "height 0.7s cubic-bezier(0.16, 1, 0.3, 1)" }}
+        style={{ height: `${headerHeight}px`, transition: "height 0.7s cubic-bezier(0.16, 1, 0.3, 1)" }}
       >
         {/* Logo */}
         <Link
@@ -45,8 +46,8 @@ export function Header() {
           aria-label={`${site.name} home`}
         >
           <span className="font-serif text-[1.4rem] font-semibold leading-none tracking-tight transition-colors duration-300 group-hover:text-gold md:text-[1.7rem]">
-            <span className="sm:hidden">Inspirationally</span>
-            <span className="hidden sm:inline">Inspirationally Propelled</span>
+            <span className="lg:hidden">IP</span>
+            <span className="hidden lg:inline">Inspirationally Propelled</span>
           </span>
         </Link>
 
@@ -89,36 +90,60 @@ export function Header() {
 
       {/* Mobile overlay */}
       <div
-        className={`fixed inset-0 top-[96px] z-40 transition-opacity duration-300 lg:hidden ${
+        className={`fixed inset-x-0 bottom-0 z-40 transition-opacity duration-500 lg:hidden ${
           open ? "opacity-100" : "pointer-events-none opacity-0"
         }`}
-        style={{ background: "rgba(26,26,26,0.1)" }}
+        style={{
+          background: "rgba(26, 26, 26, 0.08)",
+          top: `${headerHeight}px`,
+          transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)"
+        }}
         onClick={() => setOpen(false)}
         aria-hidden="true"
       />
 
       {/* Mobile menu */}
       <nav
-        className={`fixed left-0 right-0 top-[96px] z-50 border-b border-ink/4 bg-parchment px-6 pb-8 pt-4 transition-all duration-500 lg:hidden ${
-          open ? "translate-y-0 opacity-100" : "-translate-y-4 opacity-0 pointer-events-none"
+        className={`fixed inset-x-0 bottom-0 z-50 bg-parchment/95 px-6 pb-10 pt-7 backdrop-blur-xl transition-all duration-500 lg:hidden ${
+          open ? "translate-y-0 opacity-100" : "-translate-y-6 opacity-0 pointer-events-none"
         }`}
-        style={{ transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)" }}
+        style={{
+          top: `${headerHeight}px`,
+          transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)"
+        }}
         aria-label="Mobile navigation"
       >
-        {navItems.map((item) => (
-          <Link
-            key={item.href}
-            href={item.href}
-            className={`block border-b border-ink/4 py-4 font-serif text-[1.05rem] font-semibold text-ink/40 transition-colors duration-200 last:border-b-0 hover:text-ink ${
-              pathname === item.href || (item.href !== "/" && pathname.startsWith(`${item.href}/`))
-                ? "text-ink"
-                : ""
-            }`}
-            onClick={() => setOpen(false)}
-          >
-            {item.label}
-          </Link>
-        ))}
+        <div className="flex h-full flex-col justify-center">
+          <div className="grid gap-2">
+            {navItems.map((item, index) => {
+              const active = pathname === item.href || (item.href !== "/" && pathname.startsWith(`${item.href}/`));
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={`group relative flex items-center gap-4 py-1 font-serif text-[clamp(2.15rem,10vw,4.2rem)] font-semibold leading-[0.98] tracking-tight transition-all duration-300 ${
+                    active
+                      ? "text-ink"
+                      : "text-ink/35 hover:translate-x-1 hover:text-ink/75"
+                  }`}
+                  style={{
+                    transitionDelay: open ? `${index * 35}ms` : "0ms",
+                    transform: open ? "translateX(0)" : "translateX(-8px)"
+                  }}
+                  onClick={() => setOpen(false)}
+                >
+                  <span
+                    aria-hidden="true"
+                    className={`mt-1 block h-3 w-3 shrink-0 transition-all duration-300 ${
+                      active ? "bg-gold opacity-100" : "bg-gold opacity-0 group-hover:opacity-60"
+                    }`}
+                  />
+                  <span>{item.label}</span>
+                </Link>
+              );
+            })}
+          </div>
+        </div>
       </nav>
     </header>
   );
