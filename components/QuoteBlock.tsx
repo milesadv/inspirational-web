@@ -1,17 +1,32 @@
 type QuoteBlockProps = {
   quote: string;
   cite?: string;
+  size?: "default" | "large";
 };
 
-export function QuoteBlock({ quote, cite }: QuoteBlockProps) {
+export function QuoteBlock({ quote, cite, size = "default" }: QuoteBlockProps) {
+  const isLarge = size === "large";
+
   return (
-    <figure className="border-l-4 border-gold bg-white/35 px-6 py-5">
-      <blockquote className="font-serif text-2xl italic leading-snug text-forest md:text-3xl">
-        <span className="text-gold">“</span>
+    <figure className="relative my-10 pl-6 md:pl-8">
+      <div
+        className="absolute left-0 top-0 h-full w-[2px]"
+        style={{ background: "rgba(184, 137, 59, 0.3)" }}
+      />
+
+      <blockquote
+        className={`font-serif italic leading-[1.35] text-forest ${
+          isLarge ? "text-[1.6rem] md:text-[2rem]" : "text-[1.25rem] md:text-[1.45rem]"
+        }`}
+      >
         {quote}
-        <span className="text-gold">”</span>
       </blockquote>
-      {cite ? <figcaption className="mt-3 text-sm font-medium text-ink/65">{cite}</figcaption> : null}
+
+      {cite ? (
+        <figcaption className="mt-4 text-[0.78rem] font-medium tracking-wide text-ink/35">
+          {cite}
+        </figcaption>
+      ) : null}
     </figure>
   );
 }

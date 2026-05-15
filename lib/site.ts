@@ -1,6 +1,3 @@
-import type { LucideIcon } from "lucide-react";
-import { BookOpen, Compass, Feather, Mountain, ShieldCheck, Sparkles, Users } from "lucide-react";
-
 export const site = {
   name: "Inspirationally Propelled",
   description: "Beautifully illustrated stories shaped by timeless Stoical wisdom.",
@@ -94,15 +91,15 @@ export const products: Product[] = [
   }))
 ];
 
-export const pillars: Array<{ title: string; text: string; icon: LucideIcon }> = [
-  { title: "Beautifully Illustrated", text: "Warm, story-rich visuals with space for wonder.", icon: Sparkles },
-  { title: "Timelessly Wise", text: "Stoical ideas translated into humane, memorable moments.", icon: Compass },
-  { title: "For Every Age", text: "Books, gifts, and reflections for young readers and adults.", icon: Users }
+export const pillars = [
+  { title: "Beautifully Illustrated", text: "Warm, story-rich visuals with space for wonder.", href: "/about" },
+  { title: "Timelessly Wise", text: "Stoical ideas translated into humane, memorable moments.", href: "/ethos" },
+  { title: "For Every Age", text: "Books, gifts, and reflections for young readers and adults.", href: "/shop" }
 ];
 
 export const virtues = [
-  { title: "Wisdom", text: "Clear judgement before action.", href: "/team/arden", icon: BookOpen },
-  { title: "Courage", text: "Bravery that keeps its feet on the ground.", href: "/team/roscoe", icon: Mountain },
-  { title: "Justice", text: "Fairness, honesty, and responsibility.", href: "/team/kael", icon: ShieldCheck },
-  { title: "Temperance", text: "Strength shaped by restraint.", href: "/team/zephyr", icon: Feather }
+  { title: "Wisdom", text: "Clear judgement before action.", href: "/team/arden" },
+  { title: "Courage", text: "Bravery that keeps its feet on the ground.", href: "/team/roscoe" },
+  { title: "Justice", text: "Fairness, honesty, and responsibility.", href: "/team/kael" },
+  { title: "Temperance", text: "Strength shaped by restraint.", href: "/team/zephyr" }
 ];

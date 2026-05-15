@@ -7,18 +7,41 @@ type CharacterCardProps = {
   compact?: boolean;
 };
 
+const characterMoods: Record<string, "warm" | "forest" | "dawn" | "dusk"> = {
+  arden: "dawn",
+  roscoe: "forest",
+  zephyr: "warm",
+  kael: "dusk"
+};
+
 export function CharacterCard({ character, compact = false }: CharacterCardProps) {
+  const mood = characterMoods[character.slug] ?? "warm";
+
   return (
     <Link
       href={`/team/${character.slug}`}
-      className="group block rounded-md border border-gold/20 bg-white/35 p-4 transition hover:-translate-y-1 hover:border-gold hover:shadow-soft focus:outline-none focus:ring-2 focus:ring-gold"
+      className="group block focus:outline-none focus:ring-2 focus:ring-gold"
     >
-      <PlaceholderImage label={`${character.name} ${character.animal}`} aspect={compact ? "square" : "portrait"} />
-      <div className="mt-5">
-        <p className="text-sm font-semibold uppercase tracking-[0.12em] text-gold">{character.virtue}</p>
-        <h3 className="mt-2 font-serif text-3xl font-semibold text-ink">{character.name}</h3>
-        <p className="mt-1 font-medium text-forest">{character.epithet}</p>
-        {!compact ? <p className="mt-3 text-sm leading-6 text-ink/70">{character.summary}</p> : null}
+      <div className="img-zoom">
+        <PlaceholderImage
+          label={`${character.name} - ${character.animal}`}
+          aspect={compact ? "square" : "portrait"}
+          mood={mood}
+        />
+      </div>
+      <div className="pt-4">
+        <p className="text-[0.68rem] font-medium uppercase tracking-[0.14em] text-gold">
+          {character.virtue}
+        </p>
+        <h3 className="mt-1.5 font-serif text-xl font-semibold text-ink transition-colors duration-300 group-hover:text-gold md:text-[1.45rem]">
+          {character.name}
+        </h3>
+        <p className="mt-0.5 text-sm text-ink/35">
+          {character.epithet}
+        </p>
+        {!compact ? (
+          <p className="mt-2.5 text-sm leading-6 text-ink/40">{character.summary}</p>
+        ) : null}
       </div>
     </Link>
   );
